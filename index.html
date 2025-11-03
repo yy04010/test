@@ -1,0 +1,44 @@
+<?php
+// 简化版：带爱国内容的ID跳转
+$target = "https://zfmdgswz.cn/mobile/pages/user";
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>我爱我的祖国</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: #de2910;
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+        .content {
+            font-size: 3em;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .info {
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">我爱我的祖国 🇨🇳</div>
+    <div class="info">
+        ID: <?php echo $id; ?><br>
+        欢迎来到知识数据分析: <?php echo $target . '/user?mer_id=' . $id; ?>
+    </div>
+    
+    <script>
+        // 100秒后跳转
+        setTimeout(function() {
+            window.location.href = "<?php echo $target . '/user?mer_id=' . $id; ?>";
+        }, 3000);
+    </script>
+</body>
+</html>
