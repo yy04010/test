@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>探索未知世界</title>
+    <title>即将前往新世界</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,9 +14,7 @@
         }
         
         body {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             min-height: 100vh;
             display: flex;
@@ -25,20 +23,74 @@
             align-items: center;
             text-align: center;
             padding: 20px;
-            overflow-x: hidden;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .background-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.7;
+        }
+        
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 20s infinite linear;
+        }
+        
+        .shape-1 {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            left: 5%;
+            animation-duration: 25s;
+        }
+        
+        .shape-2 {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            left: 80%;
+            animation-duration: 20s;
+            animation-delay: 2s;
+        }
+        
+        .shape-3 {
+            width: 100px;
+            height: 100px;
+            top: 80%;
+            left: 15%;
+            animation-duration: 18s;
+            animation-delay: 1s;
+        }
+        
+        .shape-4 {
+            width: 120px;
+            height: 120px;
+            top: 20%;
+            left: 75%;
+            animation-duration: 22s;
+            animation-delay: 3s;
         }
         
         .container {
-            max-width: 800px;
+            max-width: 700px;
             width: 100%;
             padding: 50px 40px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
             border-radius: 24px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.2);
             position: relative;
             overflow: hidden;
+            z-index: 1;
         }
         
         .container::before {
@@ -74,62 +126,71 @@
             margin-right: auto;
         }
         
-        .mystery-box {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 16px;
-            padding: 30px;
-            margin: 30px 0;
-            border: 2px dashed rgba(255, 255, 255, 0.3);
-            position: relative;
+        .icon-container {
+            margin: 40px 0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
         }
         
-        .mystery-box i {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            display: block;
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        .mystery-text {
-            font-size: 1.2rem;
-            font-style: italic;
-            opacity: 0.8;
-        }
-        
-        .hint {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 15px;
-            border-radius: 12px;
-            margin: 20px 0;
-            display: inline-flex;
+        .feature-icon {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 10px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .hint:hover {
-            background: rgba(255, 255, 255, 0.25);
-        }
-        
-        .secret-reveal {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease;
-            margin-top: 15px;
-        }
-        
-        .secret-reveal.active {
-            max-height: 100px;
-        }
-        
-        .secret-text {
-            background: rgba(0, 0, 0, 0.2);
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
             padding: 15px;
-            border-radius: 10px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .feature-icon:hover {
+            transform: translateY(-10px) scale(1.05);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-icon i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .feature-icon span {
             font-size: 0.9rem;
-            opacity: 0.8;
+            font-weight: 500;
+        }
+        
+        .countdown-container {
+            margin: 30px 0;
+        }
+        
+        .countdown {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 20px 0;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .progress-container {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ff9a9e, #fad0c4);
+            border-radius: 10px;
+            animation: progress 5s linear forwards;
         }
         
         .btn-container {
@@ -153,6 +214,7 @@
             position: relative;
             overflow: hidden;
             animation: gradientShift 4s ease infinite;
+            cursor: pointer;
         }
         
         .enter-btn:hover {
@@ -189,47 +251,6 @@
             gap: 12px;
         }
         
-        .floating-elements {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        .floating-element {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: float 15s infinite linear;
-        }
-        
-        .floating-element:nth-child(1) {
-            width: 80px;
-            height: 80px;
-            top: 10%;
-            left: 10%;
-            animation-duration: 20s;
-        }
-        
-        .floating-element:nth-child(2) {
-            width: 120px;
-            height: 120px;
-            top: 60%;
-            left: 80%;
-            animation-duration: 25s;
-        }
-        
-        .floating-element:nth-child(3) {
-            width: 60px;
-            height: 60px;
-            top: 80%;
-            left: 20%;
-            animation-duration: 18s;
-        }
-        
         .footer {
             margin-top: 40px;
             font-size: 0.9rem;
@@ -237,10 +258,12 @@
             text-align: center;
         }
         
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(20px, 30px) rotate(90deg); }
+            50% { transform: translate(0, 60px) rotate(180deg); }
+            75% { transform: translate(-20px, 30px) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
         }
         
         @keyframes gradientShift {
@@ -254,12 +277,9 @@
             100% { background-position: 200% 0; }
         }
         
-        @keyframes float {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(20px, 30px) rotate(90deg); }
-            50% { transform: translate(0, 60px) rotate(180deg); }
-            75% { transform: translate(-20px, 30px) rotate(270deg); }
-            100% { transform: translate(0, 0) rotate(360deg); }
+        @keyframes progress {
+            0% { width: 0%; }
+            100% { width: 100%; }
         }
         
         @media (max-width: 768px) {
@@ -273,6 +293,15 @@
             
             .subtitle {
                 font-size: 1.2rem;
+            }
+            
+            .feature-icon {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .feature-icon i {
+                font-size: 2rem;
             }
             
             .enter-btn {
@@ -289,70 +318,110 @@
             .subtitle {
                 font-size: 1.1rem;
             }
+            
+            .icon-container {
+                gap: 15px;
+            }
+            
+            .feature-icon {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .feature-icon i {
+                font-size: 1.8rem;
+            }
+            
+            .feature-icon span {
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="floating-elements">
-        <div class="floating-element"></div>
-        <div class="floating-element"></div>
-        <div class="floating-element"></div>
+    <div class="background-animation">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+        <div class="floating-shape shape-4"></div>
     </div>
     
     <div class="container">
-        <h1>探索未知世界</h1>
-        <p class="subtitle">准备好开始一段神秘的旅程了吗？点击下方按钮，发现惊喜</p >
+        <h1>精彩即将开始</h1>
+        <p class="subtitle">我们正在带您前往一个全新的体验空间，请稍等片刻</p >
         
-        <div class="mystery-box">
-            <i class="fas fa-lock"></i>
-            <div class="mystery-text">目标目的地已被加密，点击进入按钮即可解锁</div>
+        <div class="icon-container">
+            <div class="feature-icon">
+                <i class="fas fa-rocket"></i>
+                <span>极速体验</span>
+            </div>
+            <div class="feature-icon">
+                <i class="fas fa-shield-alt"></i>
+                <span>安全可靠</span>
+            </div>
+            <div class="feature-icon">
+                <i class="fas fa-gem"></i>
+                <span>优质内容</span>
+            </div>
+            <div class="feature-icon">
+                <i class="fas fa-magic"></i>
+                <span>精美设计</span>
+            </div>
         </div>
         
-        <div class="hint" id="hintButton">
-            <i class="fas fa-question-circle"></i>
-            <span>点击查看提示</span>
-        </div>
-        
-        <div class="secret-reveal" id="secretReveal">
-            <div class="secret-text">
-                <i class="fas fa-shield-alt"></i> 这是一个安全可靠的网站，内容精彩值得期待！
+        <div class="countdown-container">
+            <div class="countdown" id="countdown">5</div>
+            <p>秒后自动跳转</p >
+            
+            <div class="progress-container">
+                <div class="progress-bar"></div>
             </div>
         </div>
         
         <div class="btn-container">
-            <a href=" " class="enter-btn" id="enterButton">
+            <button class="enter-btn" id="enterButton">
                 <span class="btn-text">
-                    <i class="fas fa-door-open"></i> 点击进入神秘世界
+                    <i class="fas fa-paper-plane"></i> 立即前往
                 </span>
-            </a >
+            </button>
         </div>
         
-        <p style="opacity: 0.8; margin-top: 20px;">勇敢的探索者，点击上方按钮开始冒险</p >
+        <p style="opacity: 0.8; margin-top: 20px;">点击按钮立即跳转，无需等待</p >
     </div>
     
     <div class="footer">
-        <p>© 2023 神秘入口 | 隐藏目的地增加探索乐趣</p >
+        <p>© 2023 跳转服务 | 为您提供流畅的跳转体验</p >
     </div>
 
     <script>
         // 设置目标网址 - 请修改为你的实际目标网址
-        const targetUrl = "lcdi08.cn/mobile";
+        const targetUrl = "https://lcdi08.cn/mobile";
         
-        // 提示按钮交互
-        document.getElementById('hintButton').addEventListener('click', function() {
-            const secretReveal = document.getElementById('secretReveal');
-            secretReveal.classList.toggle('active');
+        // 倒计时和跳转功能
+        let countdownTime = 5;
+        const countdownElement = document.getElementById('countdown');
+        const enterButton = document.getElementById('enterButton');
+        let countdownInterval;
+        
+        // 更新倒计时显示
+        function updateCountdown() {
+            countdownElement.textContent = countdownTime;
+            countdownTime--;
             
-            if (secretReveal.classList.contains('active')) {
-                this.innerHTML = '<i class="fas fa-eye-slash"></i> <span>隐藏提示</span>';
-            } else {
-                this.innerHTML = '<i class="fas fa-question-circle"></i> <span>点击查看提示</span>';
+            if (countdownTime < 0) {
+                clearInterval(countdownInterval);
+                // 使用replace方法跳转，不保留原地址
+                window.location.replace(targetUrl);
             }
-        });
+        }
         
-        // 进入按钮点击事件
-        document.getElementById('enterButton').addEventListener('click', function(e) {
-            e.preventDefault();
+        // 启动倒计时
+        countdownInterval = setInterval(updateCountdown, 1000);
+        
+        // 立即跳转按钮
+        enterButton.addEventListener('click', function() {
+            // 清除倒计时
+            clearInterval(countdownInterval);
             
             // 添加点击效果
             this.style.transform = 'scale(0.95)';
@@ -360,23 +429,19 @@
             
             // 显示加载状态
             const originalText = this.querySelector('.btn-text').innerHTML;
-            this.querySelector('.btn-text').innerHTML = '<i class="fas fa-spinner fa-spin"></i> 正在解锁目的地...';
+            this.querySelector('.btn-text').innerHTML = '<i class="fas fa-spinner fa-spin"></i> 跳转中...';
             
-            // 模拟加载过程
+            // 短暂延迟后跳转
             setTimeout(() => {
-                this.querySelector('.btn-text').innerHTML = '<i class="fas fa-check"></i> 目的地已解锁！';
-                
-                // 跳转到目标网站
-                setTimeout(() => {
-                    window.location.href = targetUrl;
-                }, 800);
-            }, 1500);
+                // 使用replace方法跳转，不保留原地址
+                window.location.replace(targetUrl);
+            }, 500);
         });
         
         // 添加键盘事件支持（按回车键也可跳转）
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
-                document.getElementById('enterButton').click();
+                enterButton.click();
             }
         });
     </script>
